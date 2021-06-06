@@ -6,6 +6,6 @@ Hi I am pmo and I hack stuff! This is a test website hosted on on IPFS.<!-- lagl
 
 <p>Reach out to me on <a href="https://twitter.com/pmo">Twitter</a> .</p>
 
-<p>Have a good one and remember "<span id="k">Hack the planet!</span>"</p> <!-- sjkfhskjf -->
+<p>Have a good one and remember "<span id="k">Hack the planet!</span>" </p> <!-- sjkfhskjf -->
 
 <span id="a">root@secfo.org</span>:<span id="b">~</span><span id="c">$</span>
