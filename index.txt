@@ -1,9 +1,10 @@
 <span id="a">root@secfo.org</span>:<span id="b">~</span><span id="c">$</span> cd home/IPFS <!-- kjsdfhkjdhsfkjdshfkj -->
 <span id="a">root@secfo.org</span>:<span id="b">~</span><span id="c">$</span> cat <!-- kjsdfhkjdhsfkjdshfkj -->README<br/><br/>
 
-This is a test website hosted on on IPFS.<!-- laglaglaglaglaglaglaglaglaglaglaglag --><p>I will add more content to this website soon.</p>
+Hi I am pmo and I hack stuff! This is a test website hosted on on IPFS.<!-- laglaglaglaglaglaglaglaglaglaglaglag --><p>I will add more content to this website soon.</p>
 <p>Hi I am pmo and I hack stuff!</p> <!-- ksjdokhdfgdufdfkjhfkjahdfkjhafkjhakf -->
-<p>#HackingIsNOTaCrime</p> <!-- kjdhjhgdgldjhgdwtoiewotwotjdfkjdfffsf -->
+<p>I am an <br> <a href="https://twitter.com/hacknotcrime">#HackingIsNOTaCrime</a> advocate</p> <!-- kjdhjhgdgldjhgdwtoiewotwotjdfkjdfffsf -->
+
 <p>Reach out to me on <br> <a href="https://twitter.com/pmo">Twitter</a> <br>.</p>
 
 <p>Have a good one and remember</p> "<span id="k">Hack the planet!</span>". <!-- sjkfhskjf -->
