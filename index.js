@@ -96,7 +96,7 @@ function replaceUrls(text) {
 }
 
 Typer.speed = 3;
-Typer.file = 'README.txt';
+Typer.file = 'index.txt';
 Typer.init();
 
 var timer = setInterval('t();', 30);
