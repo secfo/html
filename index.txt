@@ -10,5 +10,3 @@ Hi I am pmo and I hack stuff! This is a test website hosted on on IPFS.<!-- lagl
 <p>Have a good one and remember</p> "<span id="k">Hack the planet!</span>". <!-- sjkfhskjf -->
 
 <span id="a">root@secfo.org</span>:<span id="b">~</span><span id="c">$</span>
-
-
