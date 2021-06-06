@@ -10,5 +10,4 @@ Have a good one and remember "<span id="k">Hack the planet!</span>". <!-- sjkfhs
 
 <span id="a">root@secfo.org</span>:<span id="b">~</span><span id="c">$</span>
 
-<p> </p> <!-- ksjdokhdfgdufdfkjhfkjahdfkjhafkjhakf -->
 
