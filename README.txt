@@ -1,5 +1,5 @@
 <span id="a">root@secfo.org</span>:<span id="b">~</span><span id="c">$</span> cd IPFS/<!-- kjsdfhkjdhsfkjdshfkj -->README
-<span id="a">root@secfo.org</span>:<span id="b">~</span><span id="c">$</span> cat <!-- kjsdfhkjdhsfkjdshfkj -->README<br/><br/>
+<span id="a">root@secfo.org</span>:<span id="b">~</span><span id="c">$</span> cat <!-- kjsdfhkjdhsfkjdshfkj -->README.txt<br/><br/>
 My favorite code quote, "<span id="k">Hack the planet!</span>". <!-- sjkfhskjf -->
 
 Hey There! This is a test website hosted on on IPFS.<!-- laglaglaglaglaglaglaglaglaglaglaglag --><p>I will add more content to this website soon.</p>
