@@ -8,4 +8,4 @@ This is a test website hosted on on IPFS.<!-- laglaglaglaglaglaglaglaglaglaglagl
 
 Have a good one and remember "<span id="k">Hack the planet!</span>". <!-- sjkfhskjf -->
 
-<span id="a">root@secfo.org</span>:<span id="b">~</span><span id="c">$</span> <!-- kjsdfhkjdhsfkjdshfkj --> <p> </p>
+<span id="a">root@secfo.org</span>:<span id="b">~</span><span id="c">$</span> <!-- kjsdfhkjdhsfkjdshfkj --> 
