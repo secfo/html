@@ -1,11 +1,9 @@
 <span id="a">root@secfo.org</span>:<span id="b">~</span><span id="c">$</span> cd IPFS <!-- kjsdfhkjdhsfkjdshfkj -->
 <span id="a">root@secfo.org</span>:<span id="b">~/IPFS</span><span id="c">$</span> cat <!-- kjsdfhkjdhsfkjdshfkj -->README<br/><br/>
 
-Hi I am pmo and I hack stuff! This is a test website hosted on IPFS.<!-- laglaglaglaglaglaglaglaglaglaglaglag --><p>This is posible for free with <a href="https://fleek.co/">Fleek.co</a> hosting, ssl cert and subdomain is all included with the free package, this domain is my own.</p>
+Hi I am pmo and I hack stuff! This is a test website hosted on IPFS.<!-- laglaglaglaglaglaglaglaglaglaglaglag --><p>This is posible for free with <a href="https://fleek.co/">Fleek.</a> Hosting, ssl cert and subdomain is all included with the free package.</p>
 <p>I am also a <a href="https://www.hackingisnotacrime.org/">#HackingIsNOTaCrime</a> advocate.</p> <!-- kjdhjhgdgldjhgdwtoiewotwotjdfkjdfffsf -->
-
 <p>Reach out to me on <a href="https://twitter.com/pmo">Twitter</a>.</p>
-
 <p>Have a good one and remember "<span id="k">Hack the planet!</span>" </p> <!-- sjkfhskjf -->
 
 <span id="a">root@secfo.org</span>:<span id="b">~/IPFS</span><span id="c">$</span> cd .. <!-- kjsdfhkjdhsfkjdshfkj -->
