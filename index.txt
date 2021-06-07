@@ -3,7 +3,7 @@
 
 Hi I am pmo and I hack stuff! This is a test website hosted on IPFS.<!-- laglaglaglaglaglaglaglaglaglaglaglag --><p>This is posible for free with <a href="https://fleek.co/">Fleek.</a> Hosting, ssl cert and subdomain is all included with the free package.</p>
 <p>I am also a <a href="https://www.hackingisnotacrime.org/">#HackingIsNOTaCrime</a> advocate.</p> <!-- kjdhjhgdgldjhgdwtoiewotwotjdfkjdfffsf -->
-<p>You can reach me on <a href="https://twitter.com/pmo">Twitter.</a> This is also where you would reach out to me, if you want me to vouch for your HackingIsNOTaCrime advocacy. (Requires that I know you).</p>
+<p>You can reach me on <a href="https://twitter.com/pmo">Twitter.</a> This is also where you would reach out to me, if you want me to vouch for your <a href="https://www.hackingisnotacrime.org/">HackingIsNOTaCrime</a> advocacy. (Requires that I know you).</p>
 <p>Have a good one and remember "<span id="k">Hack the planet!</span>" </p> <!-- sjkfhskjf -->
 
 <span id="a">root@secfo.org</span>:<span id="b">~/IPFS</span><span id="c">$</span> cd .. <!-- kjsdfhkjdhsfkjdshfkj -->
