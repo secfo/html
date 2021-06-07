@@ -1,4 +1,4 @@
-<span id="a">root@secfo.org</span>:<span id="b">~</span><span id="c">$</span> cd home/IPFS <!-- kjsdfhkjdhsfkjdshfkj -->
+<span id="a">root@secfo.org</span>:<span id="b">~</span><span id="c">$</span> cd IPFS <!-- kjsdfhkjdhsfkjdshfkj -->
 <span id="a">root@secfo.org</span>:<span id="b">~/IPFS</span><span id="c">$</span> cat <!-- kjsdfhkjdhsfkjdshfkj -->README<br/><br/>
 
 Hi I am pmo and I hack stuff! This is a test website hosted on IPFS.<!-- laglaglaglaglaglaglaglaglaglaglaglag --><p>I will add more content to this website soon.</p>
