@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
         text: '',
         index: 0,
         speed: 50,
-        file: 'index.txt',
-        cursor: '<span id="cursor">_</span>', // Blinking cursor
+        file: 'data.html', // Updated to fetch data.html
+        cursor: '<span id="cursor">_</span>',
 
         init: function () {
             let consoleDiv = document.getElementById("console");
@@ -15,12 +15,18 @@ document.addEventListener("DOMContentLoaded", function () {
                     .then(response => response.text())
                     .then(data => {
                         console.log("Fetched raw text:", data); // Debugging output
-                        Typer.text = data.trim();
+                        Typer.text = Typer.decodeHtmlEntities(data.trim());
                         consoleDiv.innerHTML = ''; // Clear "Loading..."
                         Typer.startTyping();
                     })
                     .catch(error => console.error("Error loading file:", error));
-            }, 2000); // Show "Loading..." for 2 seconds
+            }, 2000);
+        },
+
+        decodeHtmlEntities: function (str) {
+            let txt = document.createElement("textarea");
+            txt.innerHTML = str;
+            return txt.value;
         },
 
         content: function () {
@@ -28,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
 
         write: function (str) {
-            document.getElementById("console").innerHTML = str + Typer.cursor; // Keep cursor at the end
+            document.getElementById("console").innerHTML = str + Typer.cursor;
         },
 
         addText: function () {
@@ -37,15 +43,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 Typer.index++;
 
                 if (char === "\n") {
-                    char = "<br/>"; // Convert newlines to <br/>
+                    char = "<br/>";
                 }
 
-                let currentText = Typer.content().replace(Typer.cursor, ""); // Remove old cursor
-                Typer.write(currentText + char); // Write new character
+                let currentText = Typer.content().replace(Typer.cursor, "");
+                Typer.write(currentText + char);
 
                 setTimeout(Typer.addText, Typer.speed);
             } else {
-                document.getElementById("cursor").remove(); // Remove cursor after typing is done
+                document.getElementById("cursor").remove();
             }
         },
 
