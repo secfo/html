@@ -2,9 +2,9 @@ document.addEventListener("DOMContentLoaded", function () {
     var Typer = {
         text: '',
         index: 0,
-        speed: 50, // Typing speed (adjust as needed)
+        speed: 50, // Typing speed (adjust if needed)
         file: 'index.txt',
-        cursor: '<span id="cursor">_</span>', // The blinking cursor
+        cursor: '<span id="cursor">_</span>', // Blinking cursor
 
         init: function () {
             let consoleDiv = document.getElementById("console");
@@ -35,8 +35,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 let char = Typer.text.charAt(Typer.index);
                 Typer.index++;
 
+                // Fix newline handling & preserve HTML formatting
                 if (char === "\n") {
-                    char = "<br/>"; // Convert newlines to <br/>
+                    char = "<br/>";
                 }
 
                 let currentText = Typer.content().replace(Typer.cursor, ""); // Remove old cursor
