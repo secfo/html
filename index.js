@@ -14,19 +14,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 fetch(Typer.file)
                     .then(response => response.text())
                     .then(data => {
-                        console.log("Fetched raw text:", data); // Debugging
-                        Typer.text = Typer.decodeHtmlEntities(data.trim());
+                        console.log("Fetched raw text:", data); // Debugging output
+                        Typer.text = data.trim();
                         consoleDiv.innerHTML = ''; // Clear "Loading..."
                         Typer.startTyping();
                     })
                     .catch(error => console.error("Error loading file:", error));
             }, 2000); // Show "Loading..." for 2 seconds
-        },
-
-        decodeHtmlEntities: function (str) {
-            let txt = document.createElement("textarea");
-            txt.innerHTML = str;
-            return txt.value;
         },
 
         content: function () {
