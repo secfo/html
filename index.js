@@ -7,11 +7,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         init: function () {
             fetch(Typer.file)
-                .then(response => response.text()) 
+                .then(response => response.text())
                 .then(data => {
-                    Typer.text = data.trim();
-                    Typer.text = Typer.convertToHTML(Typer.text); // Convert raw text to HTML
-                    Typer.startTyping();
+                    console.log("Fetched text:", data); // Debugging line
+                    Typer.text = Typer.convertToHTML(data.trim()); // Convert raw text to HTML
+                    Typer.write(Typer.text); // Immediately write content instead of simulating typing
                 })
                 .catch(error => console.error("Error loading file:", error));
         },
@@ -21,25 +21,13 @@ document.addEventListener("DOMContentLoaded", function () {
         },
 
         write: function (str) {
-            document.getElementById("console").innerHTML += str;
-        },
-
-        addText: function () {
-            if (Typer.index < Typer.text.length) {
-                let char = Typer.text.charAt(Typer.index);
-                Typer.index++;
-
-                Typer.write(char);
-                setTimeout(Typer.addText, Typer.speed);
-            }
-        },
-
-        startTyping: function () {
-            setTimeout(Typer.addText, Typer.speed);
+            document.getElementById("console").innerHTML = str;
         },
 
         convertToHTML: function (text) {
-            return text.replace(/\n/g, "<br/>"); // Convert new lines to HTML
+            return text
+                .replace(/\n/g, "<br/>") // Convert new lines to <br/>
+                .replace(/\s{2,}/g, "&nbsp;&nbsp;"); // Preserve spaces for formatting
         }
     };
 
