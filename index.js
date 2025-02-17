@@ -2,13 +2,13 @@ document.addEventListener("DOMContentLoaded", function () {
     var Typer = {
         text: '',
         index: 0,
-        speed: 50,
+        speed: 50, // Typing speed (adjust as needed)
         file: 'index.txt',
-        cursor: '<span id="cursor">_</span>', // Blinking Cursor
+        cursor: '<span id="cursor">_</span>', // The blinking cursor
 
         init: function () {
             let consoleDiv = document.getElementById("console");
-            consoleDiv.innerHTML = "<p>Loading...</p>"; // Show "Loading..." message
+            consoleDiv.innerHTML = "<p>Loading...</p>"; // Show "Loading..."
 
             setTimeout(() => {
                 fetch(Typer.file)
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
 
         write: function (str) {
-            document.getElementById("console").innerHTML = str + Typer.cursor; // Add cursor at the end
+            document.getElementById("console").innerHTML = str + Typer.cursor; // Keep cursor at the end
         },
 
         addText: function () {
@@ -36,13 +36,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 Typer.index++;
 
                 if (char === "\n") {
-                    char = "<br/>"; // Convert newlines
+                    char = "<br/>"; // Convert newlines to <br/>
                 }
 
                 let currentText = Typer.content().replace(Typer.cursor, ""); // Remove old cursor
                 Typer.write(currentText + char); // Write new character
 
                 setTimeout(Typer.addText, Typer.speed);
+            } else {
+                document.getElementById("cursor").remove(); // Remove cursor after typing is done
             }
         },
 
