@@ -7,18 +7,19 @@ document.addEventListener("DOMContentLoaded", function () {
         cursor: '<span id="cursor">_</span>', // Blinking Cursor
 
         init: function () {
-            document.getElementById("console").innerHTML = "<p>Loading...</p>"; // Show "Loading..."
-            
+            let consoleDiv = document.getElementById("console");
+            consoleDiv.innerHTML = "<p>Loading...</p>"; // Show "Loading..." message
+
             setTimeout(() => {
                 fetch(Typer.file)
                     .then(response => response.text())
                     .then(data => {
-                        Typer.text = Typer.convertToHTML(data.trim()); // Convert text to HTML
-                        document.getElementById("console").innerHTML = ''; // Clear "Loading..."
+                        Typer.text = data.trim();
+                        consoleDiv.innerHTML = ''; // Clear "Loading..."
                         Typer.startTyping();
                     })
                     .catch(error => console.error("Error loading file:", error));
-            }, 2000); // Wait 2 seconds before starting
+            }, 2000); // Show "Loading..." for 2 seconds
         },
 
         content: function () {
@@ -26,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
 
         write: function (str) {
-            document.getElementById("console").innerHTML = str + Typer.cursor; // Add cursor
+            document.getElementById("console").innerHTML = str + Typer.cursor; // Add cursor at the end
         },
 
         addText: function () {
@@ -34,17 +35,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 let char = Typer.text.charAt(Typer.index);
                 Typer.index++;
 
-                Typer.write(Typer.text.substring(0, Typer.index)); // Write text dynamically
+                if (char === "\n") {
+                    char = "<br/>"; // Convert newlines
+                }
+
+                let currentText = Typer.content().replace(Typer.cursor, ""); // Remove old cursor
+                Typer.write(currentText + char); // Write new character
+
                 setTimeout(Typer.addText, Typer.speed);
             }
         },
 
         startTyping: function () {
             setTimeout(Typer.addText, Typer.speed);
-        },
-
-        convertToHTML: function (text) {
-            return text.replace(/\n/g, "<br/>"); // Convert newlines to <br/>
         }
     };
 
