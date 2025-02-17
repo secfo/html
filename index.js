@@ -7,10 +7,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         init: function () {
             fetch(Typer.file)
-                .then(response => response.text())
+                .then(response => response.text()) 
                 .then(data => {
                     Typer.text = data.trim();
-                    Typer.text = Typer.text.replace(/\n/g, "<br/>"); // Convert new lines to HTML breaks
+                    Typer.text = Typer.convertToHTML(Typer.text); // Convert raw text to HTML
                     Typer.startTyping();
                 })
                 .catch(error => console.error("Error loading file:", error));
@@ -36,6 +36,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         startTyping: function () {
             setTimeout(Typer.addText, Typer.speed);
+        },
+
+        convertToHTML: function (text) {
+            return text.replace(/\n/g, "<br/>"); // Convert new lines to HTML
         }
     };
 
