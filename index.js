@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(response => response.text())
                 .then(data => {
                     Typer.text = data.trim();
+                    Typer.text = Typer.text.replace(/\n/g, "<br/>"); // Convert new lines to HTML breaks
                     Typer.startTyping();
                 })
                 .catch(error => console.error("Error loading file:", error));
@@ -27,9 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (Typer.index < Typer.text.length) {
                 let char = Typer.text.charAt(Typer.index);
                 Typer.index++;
-                if (char === "\n") {
-                    char = "<br/>";
-                }
+
                 Typer.write(char);
                 setTimeout(Typer.addText, Typer.speed);
             }
