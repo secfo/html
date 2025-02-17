@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var Typer = {
         text: '',
         index: 0,
-        speed: 50, // Adjust typing speed here
+        speed: 50,
         file: 'index.txt',
         cursor: '<span id="cursor">_</span>', // Blinking cursor
 
@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 fetch(Typer.file)
                     .then(response => response.text())
                     .then(data => {
-                        console.log("Fetched text:", data); // Debugging
-                        Typer.text = Typer.formatText(data.trim());
+                        console.log("Fetched text (before decoding):", data); // Debugging
+                        Typer.text = Typer.decodeHtmlEntities(data.trim());
                         consoleDiv.innerHTML = ''; // Clear "Loading..."
                         Typer.startTyping();
                     })
@@ -23,11 +23,10 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 2000); // Show "Loading..." for 2 seconds
         },
 
-        formatText: function (text) {
-            return text
-                .replace(/</g, "&lt;") // Prevent raw HTML from breaking the script
-                .replace(/>/g, "&gt;")
-                .replace(/\n/g, "<br/>"); // Convert newlines to <br/>
+        decodeHtmlEntities: function (str) {
+            let txt = document.createElement("textarea");
+            txt.innerHTML = str;
+            return txt.value;
         },
 
         content: function () {
@@ -42,6 +41,10 @@ document.addEventListener("DOMContentLoaded", function () {
             if (Typer.index < Typer.text.length) {
                 let char = Typer.text.charAt(Typer.index);
                 Typer.index++;
+
+                if (char === "\n") {
+                    char = "<br/>"; // Convert newlines to <br/>
+                }
 
                 let currentText = Typer.content().replace(Typer.cursor, ""); // Remove old cursor
                 Typer.write(currentText + char); // Write new character
