@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 fetch(Typer.file)
                     .then(response => response.text())
                     .then(data => {
-                        console.log("Fetched text (before decoding):", data); // Debugging
+                        console.log("Fetched raw text:", data); // Debugging
                         Typer.text = Typer.decodeHtmlEntities(data.trim());
                         consoleDiv.innerHTML = ''; // Clear "Loading..."
                         Typer.startTyping();
