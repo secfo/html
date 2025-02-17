@@ -3,30 +3,24 @@ document.addEventListener("DOMContentLoaded", function () {
         text: '',
         index: 0,
         speed: 50,
-        file: 'data.html', // Updated to fetch data.html
+        file: 'data.html', // Load renamed file
         cursor: '<span id="cursor">_</span>',
 
         init: function () {
             let consoleDiv = document.getElementById("console");
-            consoleDiv.innerHTML = "<p>Loading...</p>"; // Show "Loading..."
+            consoleDiv.innerHTML = "<p>Loading...</p>";
 
             setTimeout(() => {
                 fetch(Typer.file)
                     .then(response => response.text())
                     .then(data => {
                         console.log("Fetched raw text:", data); // Debugging output
-                        Typer.text = Typer.decodeHtmlEntities(data.trim());
-                        consoleDiv.innerHTML = ''; // Clear "Loading..."
+                        Typer.text = data.trim();
+                        consoleDiv.innerHTML = '';
                         Typer.startTyping();
                     })
                     .catch(error => console.error("Error loading file:", error));
             }, 2000);
-        },
-
-        decodeHtmlEntities: function (str) {
-            let txt = document.createElement("textarea");
-            txt.innerHTML = str;
-            return txt.value;
         },
 
         content: function () {
