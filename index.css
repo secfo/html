@@ -51,7 +51,7 @@ a {
 
 #cursor {
     display: inline-block;
-    width: 10px;
+    width: 8px;
     height: 16px;
     background-color: #0f0;
     animation: blink 0.7s steps(2, start) infinite;
