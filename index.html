@@ -1,1 +1,155 @@
-New website on its way
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISP Router Password Security Information</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .info-card h3 {
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600; /* semibold */
+            color: #1f2937; /* gray-800 */
+        }
+        .info-card p, .info-card li {
+            color: #4b5563; /* gray-600 */
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900">ISP Router Password & Wi-Fi Security</h1>
+        </header>
+
+        <div class="bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto">
+            
+            <div class="info-card space-y-6">
+                
+                <!-- Section 1: ISP Practices (The Basics) -->
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b pb-2">ISP Router Password Practices</h2>
+                    <p>For enhanced security, nearly all major Internet Service Providers (ISPs) have moved away from universal default passwords. Instead of using a single password like "admin" for all devices, they now ship routers with a **unique, randomly generated password for each customer.**</p>
+                </div>
+                
+                <div>
+                    <h3>Password Style & Format:</h3>
+                    <p>The unique password is typically a random string of alphanumeric characters, which may include:</p>
+                    <ul class="list-disc list-inside ml-4 mt-2">
+                        <li>Uppercase letters (A-Z)</li>
+                        <li>Lowercase letters (a-z)</li>
+                        <li>Numbers (0-9)</li>
+                    </ul>
+                    <p class="mt-2">The goal is to create a non-dictionary password that is difficult to guess. For example, a password could look like <strong><code>9kFw4mJ7</code></strong> or <strong><code>aBc8xZ2p</code></strong>.</p>
+                </div>
+
+                <div>
+                    <h3>Location of the Password:</h3>
+                    <p class="mt-2 p-4 bg-blue-50 border-l-4 border-blue-400 text-blue-800">The only reliable source for your unique Wi-Fi password (often called "WiFi Key" or "Password") is the **sticker on the back or bottom of the router itself**. This sticker will also list the default Wi-Fi network name (SSID).</p>
+                </div>
+
+                <!-- Section 2: WPA/WPA2 Vulnerability (The "Why") -->
+                <div class="pt-4 border-t">
+                    <h3 class="font-semibold text-lg">WPA/WPA2 Handshake Vulnerability</h3>
+                    <p>The standard Wi-Fi security protocols before WPA3 are vulnerable to offline attacks. An attacker within physical range of your Wi-Fi can capture the "4-way handshake," which is the data exchanged when a device connects to your router. This captured data, while encrypted, can be attacked offline using a wordlist. Using powerful GPUs, an attacker's computer can try billions of passwords from the list against the captured data every second. This means that given enough time, almost any password can eventually be cracked. This is why having a very long, complex, and unpredictable Wi-Fi password is so crucial when using WPA2—it simply makes the time required to crack it impractically long.</p>
+                </div>
+                
+                <!-- Section 3: PMKID Attack (A more advanced "Why") -->
+                <div class="pt-4 border-t">
+                    <h3 class="font-semibold text-lg">The PMKID Attack (A Faster WPA/WPA2 Hack)</h3>
+                    <p>A more modern attack on WPA/WPA2 targets the Pairwise Master Key Identifier (PMKID). This method is often more efficient because an attacker doesn't need to wait for a user to connect to the network to capture a full 4-way handshake. Instead, the attacker can directly request the PMKID from the access point. This PMKID is a hash derived from the Wi-Fi password and other network information. Just like with a captured handshake, this PMKID can be taken offline and attacked with a wordlist using GPU-powered tools. This vulnerability is especially prevalent on networks with "fast roaming" (802.11r) features enabled, but it can affect other routers as well.</p>
+                </div>
+
+                <!-- Section 4: WPA3 (The Solution) -->
+                <div class="pt-4 border-t">
+                    <h3 class="font-semibold text-lg">The WPA3 Advantage</h3>
+                    <p>WPA3 is the current security standard and provides significant protection against these types of attacks. Its key benefit is the "Simultaneous Authentication of Equals" (SAE) handshake protocol. Even if an attacker captures the handshake traffic, they cannot take it offline and attack it with a wordlist. Each guess requires a new, live interaction with the router, making a brute-force attack incredibly slow and impractical. WPA3 also provides enhanced security for open (public) Wi-Fi networks by encrypting traffic between each device and the router individually.</p>
+                </div>
+
+                <!-- Section 5: WPS (A Critical Warning) -->
+                <div class="pt-4 border-t">
+                    <h3 class="font-semibold text-lg">Why You Should Disable WPS</h3>
+                    <div class="p-4 bg-red-50 border-l-4 border-red-400 text-red-800">
+                        <p><strong>WPS (Wi-Fi Protected Setup) is a major security risk and should always be disabled in your router's settings.</strong> WPS was designed for convenience, allowing users to connect by pressing a button or entering an 8-digit PIN.</p>
+                        <p class="mt-2">However, the PIN authentication method has a critical design flaw. The 8-digit PIN is validated in two separate halves. This means an attacker doesn't need to guess all 100,000,000 possible 8-digit PINs. They only need to guess a 4-digit number (10,000 possibilities) and then a 3-digit number (1,000 possibilities). This reduces the total guesses to just 11,000, which can be done in a matter of hours. Once the WPS PIN is cracked, the attacker can retrieve your actual Wi-Fi password, no matter how long or complex it is.</p>
+                    </div>
+                </div>
+
+                <!-- Section 6: Wordlist Example (The "How") -->
+                 <div class="pt-4 border-t">
+                    <h3 class="font-semibold text-lg">Security Analysis & Wordlist Example</h3>
+                    <div class="mt-2 p-4 bg-gray-50 rounded-lg border">
+                        <h4 class="font-bold">The Risk of Predictable Patterns</h4>
+                        <p class="text-sm mt-1">While a random password for each device is good, it's not perfect if the generation pattern is known. If an attacker knows an ISP always generates 8-character passwords using only lowercase letters and numbers, they don't have to try guessing from all possible characters. Instead, they can build a much smaller, targeted dictionary or "wordlist" containing every possible combination that fits that specific pattern. This makes a brute-force attack significantly faster and more likely to succeed.</p>
+                        <h4 class="font-bold mt-4">Example Wordlist Generation Logic</h4>
+                        <p class="text-sm mt-1">This is a functional example to illustrate the logic. It will generate a small, safe sample of passwords that match a predictable pattern.</p>
+                        <pre class="bg-gray-900 text-white p-3 rounded-md text-xs mt-2 overflow-x-auto"><code id="wordlist-code-block">
+function generateSample(charset, length, count) {
+    let sample = [];
+    for (let i = 0; i < count; i++) {
+        let password = '';
+        for (let j = 0; j < length; j++) {
+            password += charset.charAt(
+                Math.floor(Math.random() * charset.length)
+            );
+        }
+        sample.push(password);
+    }
+    return sample;
+}
+
+// Example usage:
+const lowercaseNumeric = 'abcdefghijklmnopqrstuvwxyz0123456789';
+const samplePasswords = generateSample(lowercaseNumeric, 8, 5);
+// console.log(samplePasswords);
+                        </code></pre>
+                        <div class="mt-2">
+                            <button id="run-wordlist-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-colors">Run Example</button>
+                            <div id="wordlist-output" class="mt-2 text-xs p-2 bg-gray-100 rounded min-h-[50px]"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const runBtn = document.getElementById('run-wordlist-btn');
+            const outputDiv = document.getElementById('wordlist-output');
+            
+            if(runBtn) {
+                runBtn.addEventListener('click', () => {
+                    // Safely define the function without using eval()
+                    const generateSample = (charset, length, count) => {
+                        let sample = [];
+                        for (let i = 0; i < count; i++) {
+                            let password = '';
+                            for (let j = 0; j < length; j++) {
+                                password += charset.charAt(
+                                    Math.floor(Math.random() * charset.length)
+                                );
+                            }
+                            sample.push(password);
+                        }
+                        return sample;
+                    };
+
+                    const charset = 'abcdefghijklmnopqrstuvwxyz0123456789';
+                    const sample = generateSample(charset, 8, 10);
+                    
+                    outputDiv.innerHTML = '<strong>Generated Sample:</strong><br>' + sample.join('<br>');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
