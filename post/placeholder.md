@@ -20,10 +20,4 @@ I plan to write about a few topics that I'm passionate about:
 
 I'm excited to start this journey and share my thoughts. Here's a little code snippet to kick things off:
 
-```javascript
-// A classic for a new beginning!
-function helloWorld() {
-  console.log("Hello, Blog World!");
-}
-
-helloWorld();
+javascript** // En klassiker for en ny begyndelse! function helloWorld() { console.log("Hello, Blog World!"); } helloWorld(); **
