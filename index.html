@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wi-Fi Security Information</title>
+    <title>ISP & Wi-Fi Security Information</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -24,7 +24,8 @@
         .info-card p, .info-card li {
             color: #4b5563; /* gray-600 */
         }
-        .info-card code {
+        /* Style for inline code snippets, but not for code inside a <pre> block */
+        .info-card :not(pre) > code {
             background-color: #e5e7eb;
             padding: 0.125rem 0.25rem;
             border-radius: 0.25rem;
@@ -38,7 +39,7 @@
     <div class="container mx-auto p-4 sm:p-6 lg:p-8">
 
         <header class="text-center mb-8">
-            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900">Wi-Fi Security</h1>
+            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900">Wi-Fi Security Explainer</h1>
         </header>
 
         <div class="bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto">
@@ -60,7 +61,7 @@
                 <!-- Section 1: ISP Practices -->
                 <div class="pt-6 border-t">
                     <h3 class="mb-2">ISP Router Password Practices</h3>
-                    <p>For enhanced security, most major Internet Service Providers (ISPs) have stopped using universal default passwords (like `admin`/`password`). Instead, they provision routers with a **unique, randomly generated pre-shared key (PSK) for each customer.**</p>
+                    <p>For enhanced security, most major Internet Service Providers (ISPs) have stopped using universal default passwords (like <code>admin</code>/<code>password</code>). Instead, they provision routers with a **unique, randomly generated pre-shared key (PSK) for each customer.**</p>
                     
                     <h4 class="mt-4 font-semibold">Password Composition:</h4>
                     <p>The unique password is typically a random string of alphanumeric characters. While patterns vary, they are designed to be non-dictionary words to resist simple guessing. For example, a password could look like <strong><code>9kFw4mJ7</code></strong> or <strong><code>aBc8xZ2p</code></strong>.</p>
@@ -83,7 +84,7 @@
                     <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
                         <li><strong>No Clients Needed:</strong> Unlike the 4-way handshake attack, an attacker does not need to wait for a user to connect. They can directly query the Access Point (AP).</li>
                         <li><strong>The Process:</strong> The attacker sends a single association frame to the AP. If the AP supports a roaming function (like 802.11r), it may respond with the PMKID in the first EAPOL frame. The PMKID is a hash derived from the PSK, the AP's MAC address, and the client's MAC address.</li>
-                        <li><strong>Offline Cracking:</strong> Since the attacker knows all other inputs, they can use the captured PMKID to perform an offline brute-force attack on the password, just like with the full handshake, often using tools like `hcxdumptool` and `Hashcat`.</li>
+                        <li><strong>Offline Cracking:</strong> Since the attacker knows all other inputs, they can use the captured PMKID to perform an offline brute-force attack on the password, just like with the full handshake, often using tools like <code>hcxdumptool</code> and <code>Hashcat</code>.</li>
                     </ul>
                 </div>
                 
