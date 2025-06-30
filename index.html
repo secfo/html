@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ISP Router Password Security Information</title>
+    <title>Wi-Fi Security Information</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -12,12 +12,24 @@
             background-color: #f3f4f6;
         }
         .info-card h3 {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* semibold */
+            color: #1f2937; /* gray-800 */
+        }
+        .info-card h4 {
             font-size: 1.125rem; /* text-lg */
             font-weight: 600; /* semibold */
             color: #1f2937; /* gray-800 */
         }
         .info-card p, .info-card li {
             color: #4b5563; /* gray-600 */
+        }
+        .info-card code {
+            background-color: #e5e7eb;
+            padding: 0.125rem 0.25rem;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            color: #111827;
         }
     </style>
 </head>
@@ -26,65 +38,89 @@
     <div class="container mx-auto p-4 sm:p-6 lg:p-8">
 
         <header class="text-center mb-8">
-            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900">ISP Router Password & Wi-Fi Security</h1>
+            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900">Wi-Fi Security</h1>
         </header>
 
         <div class="bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto">
             
-            <div class="info-card space-y-6">
-                
-                <!-- Section 1: ISP Practices (The Basics) -->
+            <div class="info-card space-y-8">
+
+                <!-- Section 0: Introduction / Key Recommendations -->
                 <div>
-                    <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b pb-2">ISP Router Password Practices</h2>
-                    <p>For enhanced security, nearly all major Internet Service Providers (ISPs) have moved away from universal default passwords. Instead of using a single password like "admin" for all devices, they now ship routers with a **unique, randomly generated password for each customer.**</p>
-                </div>
-                
-                <div>
-                    <h3>Password Style & Format:</h3>
-                    <p>The unique password is typically a random string of alphanumeric characters, which may include:</p>
-                    <ul class="list-disc list-inside ml-4 mt-2">
-                        <li>Uppercase letters (A-Z)</li>
-                        <li>Lowercase letters (a-z)</li>
-                        <li>Numbers (0-9)</li>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b pb-2">Key Security Recommendations</h2>
+                    <p class="mb-4">To ensure your home network is as secure as possible, follow these critical best practices:</p>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong>Change Your Default Password:</strong> Even if your ISP provides a random password, it's best to change it to something unique that only you know. This is the single most important step you can take.</li>
+                        <li><strong>Use WPA3 Security:</strong> When setting up your Wi-Fi, always choose the WPA3 option if it's available. It protects against the password cracking techniques described on this page. If WPA3 is not an option, use WPA2 with a very long and complex password.</li>
+                        <li><strong>Disable Unnecessary Features:</strong> Turn off features you don't use, especially WPS (Wi-Fi Protected Setup). As explained below, WPS has a major vulnerability that makes it easy for attackers to break into your network.</li>
+                        <li><strong>Update Your Firmware:</strong> Regularly check for and install firmware updates from your router's manufacturer. This is the only way to patch known security holes.</li>
                     </ul>
-                    <p class="mt-2">The goal is to create a non-dictionary password that is difficult to guess. For example, a password could look like <strong><code>9kFw4mJ7</code></strong> or <strong><code>aBc8xZ2p</code></strong>.</p>
                 </div>
 
-                <div>
-                    <h3>Location of the Password:</h3>
+                <!-- Section 1: ISP Practices -->
+                <div class="pt-6 border-t">
+                    <h3 class="mb-2">ISP Router Password Practices</h3>
+                    <p>For enhanced security, most major Internet Service Providers (ISPs) have stopped using universal default passwords (like `admin`/`password`). Instead, they provision routers with a **unique, randomly generated pre-shared key (PSK) for each customer.**</p>
+                    
+                    <h4 class="mt-4 font-semibold">Password Composition:</h4>
+                    <p>The unique password is typically a random string of alphanumeric characters. While patterns vary, they are designed to be non-dictionary words to resist simple guessing. For example, a password could look like <strong><code>9kFw4mJ7</code></strong> or <strong><code>aBc8xZ2p</code></strong>.</p>
+
+                    <h4 class="mt-4 font-semibold">Location:</h4>
                     <p class="mt-2 p-4 bg-blue-50 border-l-4 border-blue-400 text-blue-800">The only reliable source for your unique Wi-Fi password (often called "WiFi Key" or "Password") is the **sticker on the back or bottom of the router itself**. This sticker will also list the default Wi-Fi network name (SSID).</p>
                 </div>
-
-                <!-- Section 2: WPA/WPA2 Vulnerability (The "Why") -->
-                <div class="pt-4 border-t">
-                    <h3 class="font-semibold text-lg">WPA/WPA2 Handshake Vulnerability</h3>
-                    <p>The standard Wi-Fi security protocols before WPA3 are vulnerable to offline attacks. An attacker within physical range of your Wi-Fi can capture the "4-way handshake," which is the data exchanged when a device connects to your router. This captured data, while encrypted, can be attacked offline using a wordlist. Using powerful GPUs, an attacker's computer can try billions of passwords from the list against the captured data every second. This means that given enough time, almost any password can eventually be cracked. This is why having a very long, complex, and unpredictable Wi-Fi password is so crucial when using WPA2—it simply makes the time required to crack it impractically long.</p>
+                
+                <!-- Section 2: WPA/WPA2 Vulnerability -->
+                <div class="pt-6 border-t">
+                    <h3 class="mb-2">WPA/WPA2 Handshake Vulnerability</h3>
+                    <p>The standard Wi-Fi security protocols before WPA3 are vulnerable to offline brute-force attacks by capturing the **4-Way Handshake**. This cryptographic exchange occurs when a client device connects to the network. An attacker in proximity can capture these frames without needing to be on the network.</p>
+                    <p class="mt-2">The handshake itself doesn't contain the password, but it contains a message integrity code (MIC) that is derived from it. An attacker can use this captured data offline and attempt to crack it. Using modern **Graphics Processing Units (GPUs)**, which are highly efficient at parallel computations, an attacker can test billions of potential passwords per second against the captured handshake. With enough time and computational power, any password can theoretically be cracked. The goal of a strong password is to make this process infeasibly long.</p>
                 </div>
                 
-                <!-- Section 3: PMKID Attack (A more advanced "Why") -->
-                <div class="pt-4 border-t">
-                    <h3 class="font-semibold text-lg">The PMKID Attack (A Faster WPA/WPA2 Hack)</h3>
-                    <p>A more modern attack on WPA/WPA2 targets the Pairwise Master Key Identifier (PMKID). This method is often more efficient because an attacker doesn't need to wait for a user to connect to the network to capture a full 4-way handshake. Instead, the attacker can directly request the PMKID from the access point. This PMKID is a hash derived from the Wi-Fi password and other network information. Just like with a captured handshake, this PMKID can be taken offline and attacked with a wordlist using GPU-powered tools. This vulnerability is especially prevalent on networks with "fast roaming" (802.11r) features enabled, but it can affect other routers as well.</p>
+                <!-- Section 3: PMKID Attack -->
+                <div class="pt-6 border-t">
+                    <h3 class="mb-2">The PMKID Attack (A Faster WPA/WPA2 Hack)</h3>
+                    <p>Discovered in 2018, this attack is a more efficient method for cracking WPA/WPA2 passwords. It targets the **Pairwise Master Key Identifier (PMKID)**.</p>
+                    <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+                        <li><strong>No Clients Needed:</strong> Unlike the 4-way handshake attack, an attacker does not need to wait for a user to connect. They can directly query the Access Point (AP).</li>
+                        <li><strong>The Process:</strong> The attacker sends a single association frame to the AP. If the AP supports a roaming function (like 802.11r), it may respond with the PMKID in the first EAPOL frame. The PMKID is a hash derived from the PSK, the AP's MAC address, and the client's MAC address.</li>
+                        <li><strong>Offline Cracking:</strong> Since the attacker knows all other inputs, they can use the captured PMKID to perform an offline brute-force attack on the password, just like with the full handshake, often using tools like `hcxdumptool` and `Hashcat`.</li>
+                    </ul>
                 </div>
-
-                <!-- Section 4: WPA3 (The Solution) -->
-                <div class="pt-4 border-t">
-                    <h3 class="font-semibold text-lg">The WPA3 Advantage</h3>
-                    <p>WPA3 is the current security standard and provides significant protection against these types of attacks. Its key benefit is the "Simultaneous Authentication of Equals" (SAE) handshake protocol. Even if an attacker captures the handshake traffic, they cannot take it offline and attack it with a wordlist. Each guess requires a new, live interaction with the router, making a brute-force attack incredibly slow and impractical. WPA3 also provides enhanced security for open (public) Wi-Fi networks by encrypting traffic between each device and the router individually.</p>
+                
+                <!-- Section 4: The WPA3 Advantage -->
+                <div class="pt-6 border-t">
+                    <h3 class="mb-2">The WPA3 Advantage</h3>
+                    <p>WPA3 is the current security standard and directly addresses the vulnerabilities in WPA2.</p>
+                    <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+                        <li><strong>SAE Handshake:</strong> WPA3 replaces the WPA2 handshake with **Simultaneous Authentication of Equals (SAE)**, also known as "Dragonfly" Key Exchange. This method is resistant to offline dictionary attacks. Even if an attacker captures the authentication frames, they cannot be used for offline cracking. Each password guess requires a new, live interaction with the AP, making brute-force attacks impractically slow.</li>
+                        <li><strong>Protected Management Frames (PMF):</strong> WPA3 mandates the use of PMF, which protects against deauthentication and disassociation attacks. This prevents an attacker from forcibly disconnecting clients from the network, a common tactic used to initiate handshake captures.</li>
+                    </ul>
                 </div>
-
-                <!-- Section 5: WPS (A Critical Warning) -->
-                <div class="pt-4 border-t">
-                    <h3 class="font-semibold text-lg">Why You Should Disable WPS</h3>
+                
+                <!-- Section 5: The WPS Vulnerability -->
+                <div class="pt-6 border-t">
+                    <h3 class="mb-2">Why You Should Disable WPS</h3>
                     <div class="p-4 bg-red-50 border-l-4 border-red-400 text-red-800">
-                        <p><strong>WPS (Wi-Fi Protected Setup) is a major security risk and should always be disabled in your router's settings.</strong> WPS was designed for convenience, allowing users to connect by pressing a button or entering an 8-digit PIN.</p>
-                        <p class="mt-2">However, the PIN authentication method has a critical design flaw. The 8-digit PIN is validated in two separate halves. This means an attacker doesn't need to guess all 100,000,000 possible 8-digit PINs. They only need to guess a 4-digit number (10,000 possibilities) and then a 3-digit number (1,000 possibilities). This reduces the total guesses to just 11,000, which can be done in a matter of hours. Once the WPS PIN is cracked, the attacker can retrieve your actual Wi-Fi password, no matter how long or complex it is.</p>
+                        <p><strong>WPS (Wi-Fi Protected Setup) is a major security risk and should always be disabled in your router's settings.</strong> While designed for convenience, its PIN feature contains a fatal design flaw.</p>
+                        <p class="mt-2">The 8-digit PIN is not validated as a single number. Instead, it is broken into two halves: the first four digits are validated separately from the next three. The eighth digit is a checksum. This fundamentally flawed process reduces the total number of possibilities from 100,000,000 (for an 8-digit PIN) down to just 11,000 (10,000 + 1,000). This small number of combinations can be brute-forced in a matter of hours, revealing the WPA/WPA2 password regardless of its complexity.</p>
                     </div>
                 </div>
 
-                <!-- Section 6: Wordlist Example (The "How") -->
-                 <div class="pt-4 border-t">
-                    <h3 class="font-semibold text-lg">Security Analysis & Wordlist Example</h3>
+                <!-- Section 6: Router Vulnerabilities & "Backdoors" -->
+                <div class="pt-6 border-t">
+                    <h3 class="mb-2">A Note on Router Vulnerabilities & "Backdoors"</h3>
+                    <p>Over the years, numerous security vulnerabilities have been discovered in devices from all major router manufacturers, including TP-Link, Netgear, D-Link, Asus, and others. While the term "backdoor" implies malicious intent from the manufacturer, these issues are almost always critical programming errors or oversights that create a backdoor-like vulnerability. Common types of flaws include:</p>
+                     <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+                        <li><strong>Hardcoded Credentials:</strong> Hidden or undocumented accounts with default passwords left in the firmware by developers for debugging.</li>
+                        <li><strong>Command Injection:</strong> Flaws in the router's web interface that allow an attacker to run malicious commands on the device.</li>
+                        <li><strong>Outdated Software:</strong> Routers often run older versions of Linux and other software components that contain well-known, unpatched vulnerabilities.</li>
+                    </ul>
+                    <p class="mt-2">These vulnerabilities are what allow attackers to create botnets (like Mirai or Volt Typhoon) by taking over thousands of routers. This makes it absolutely essential to keep your router's firmware updated, as manufacturers release patches to fix these flaws once they are discovered.</p>
+                </div>
+
+                <!-- Section 7: Wordlist Generation Example -->
+                 <div class="pt-6 border-t">
+                    <h3 class="mb-2">Security Analysis & Wordlist Example</h3>
                     <div class="mt-2 p-4 bg-gray-50 rounded-lg border">
                         <h4 class="font-bold">The Risk of Predictable Patterns</h4>
                         <p class="text-sm mt-1">While a random password for each device is good, it's not perfect if the generation pattern is known. If an attacker knows an ISP always generates 8-character passwords using only lowercase letters and numbers, they don't have to try guessing from all possible characters. Instead, they can build a much smaller, targeted dictionary or "wordlist" containing every possible combination that fits that specific pattern. This makes a brute-force attack significantly faster and more likely to succeed.</p>
@@ -106,8 +142,8 @@ function generateSample(charset, length, count) {
 }
 
 // Example usage:
-const lowercaseNumeric = 'abcdefghijklmnopqrstuvwxyz0123456789';
-const samplePasswords = generateSample(lowercaseNumeric, 8, 5);
+const alphanumeric = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+const samplePasswords = generateSample(alphanumeric, 8, 5);
 // console.log(samplePasswords);
                         </code></pre>
                         <div class="mt-2">
@@ -128,7 +164,6 @@ const samplePasswords = generateSample(lowercaseNumeric, 8, 5);
             
             if(runBtn) {
                 runBtn.addEventListener('click', () => {
-                    // Safely define the function without using eval()
                     const generateSample = (charset, length, count) => {
                         let sample = [];
                         for (let i = 0; i < count; i++) {
@@ -143,7 +178,7 @@ const samplePasswords = generateSample(lowercaseNumeric, 8, 5);
                         return sample;
                     };
 
-                    const charset = 'abcdefghijklmnopqrstuvwxyz0123456789';
+                    const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
                     const sample = generateSample(charset, 8, 10);
                     
                     outputDiv.innerHTML = '<strong>Generated Sample:</strong><br>' + sample.join('<br>');
