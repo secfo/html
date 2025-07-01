@@ -176,8 +176,13 @@
 
     <!-- Header -->
     <header class="header">
-        <a href="#" id="home-link">
+        <a href="#" id="home-link" class="block relative">
             <img src="https://raw.githubusercontent.com/secfo/html/main/image/banner.png" alt="SECFO.ORG Banner" class="w-full h-auto block">
+            <div class="absolute inset-0 flex items-center justify-center">
+                <div class="bg-black bg-opacity-70 p-2 md:p-4">
+                    <h1 class="text-xl md:text-3xl lg:text-4xl" style="font-family: 'VT323', monospace; color: #FFFFFF; text-shadow: 0 0 10px var(--accent-color);">ALL YOUR BASE ARE BELONG TO US</h1>
+                </div>
+            </div>
         </a>
     </header>
 
@@ -215,48 +220,19 @@
             document.getElementById('year').textContent = new Date().getFullYear();
             
             // Initial load
-            displayPostList(true);
+            displayPostList();
 
-            // Make header link go to real post list
+            // Make header link go to post list
             document.getElementById('home-link').addEventListener('click', (e) => {
                 e.preventDefault();
-                displayPostList(false);
+                displayPostList();
             });
         });
 
-        async function displayPostList(useMockData = false) {
+        async function displayPostList() {
             const contentContainer = document.getElementById('content-container');
             contentContainer.innerHTML = `<p class="text-2xl text-center py-10">ACCESSING DATASTREAM...</p>`;
             document.title = 'SECFO.ORG';
-
-            if (useMockData) {
-                let postsHtml = '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">';
-                for (let i = 1; i <= 9; i++) {
-                    const titleText = `Placeholder Post ${i}`;
-                    const date = `2025-07-${String(10 - i).padStart(2, '0')}`;
-                    const timestamp = new Date(date).getTime();
-                    const imageUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPONAME}/main/image/post.png`;
-                    const fragmentNumber = String(i).padStart(2, '0');
-                    const fileName = `placeholder.md`;
-
-                    postsHtml += `
-                        <a class="post-card" data-post-file="${fileName}">
-                            <div class="image-container">
-                                <img src="${imageUrl}" alt="${titleText}" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0d0c1d/ff00c1?text=IMAGE+NOT+FOUND';">
-                                <div class="fragment-overlay">
-                                    <span class="fragment-title">FRAGMENT ${fragmentNumber}: ${titleText}</span>
-                                    <span class="fragment-details">timestamp: ${timestamp}</span>
-                                    <span class="fragment-details">file: ${fileName}</span>
-                                </div>
-                            </div>
-                        </a>
-                    `;
-                }
-                postsHtml += '</div>';
-                contentContainer.innerHTML = postsHtml;
-                addPostLinkListeners();
-                return;
-            }
 
             const apiUrl = `https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPONAME}/contents/${POSTS_DIRECTORY}`;
 
@@ -342,38 +318,6 @@
         async function displaySinglePost(fileName) {
             const contentContainer = document.getElementById('content-container');
             contentContainer.innerHTML = `<p class="text-2xl text-center py-10">DECRYPTING FILE: ${fileName}...</p>`;
-
-            if (fileName === 'placeholder.md') {
-                 const mockMarkdown = `---
-title: Example Placeholder Post
----
-## This is a sample post
-
-This is the content of the placeholder post. All the links on the homepage point here for this demonstration.
-
-\`\`\`javascript
-// Your actual code will be syntax highlighted.
-function test() {
-    console.log("This is a test.");
-}
-\`\`\``;
-                const htmlContent = converter.makeHtml(mockMarkdown);
-                document.title = "Placeholder Post";
-                contentContainer.innerHTML = `
-                    <div class="mb-8">
-                        <a href="#" class="text-lg back-to-index">&lt;&lt; RETURN TO INDEX</a>
-                    </div>
-                    <article class="prose max-w-none">${htmlContent}</article>
-                `;
-                contentContainer.querySelectorAll('pre code').forEach((block) => {
-                    hljs.highlightElement(block);
-                });
-                contentContainer.querySelector('.back-to-index').addEventListener('click', (event) => {
-                    event.preventDefault();
-                    displayPostList(true); // Go back to the mock list
-                });
-                return;
-            }
 
             const postUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPONAME}/main/${POSTS_DIRECTORY}/${fileName}`;
 
