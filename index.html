@@ -21,7 +21,7 @@
             --header-bg-color: #0d0c1d;
             --accent-color: #ff00c1; /* Neon Pink */
             --border-color: rgba(0, 229, 255, 0.2);
-            --post-bg-color: rgba(13, 12, 29, 0.8);
+            --post-bg-color: #161b22; /* Slightly lighter dark blue */
             --code-block-bg: #282c34; /* Atom One Dark background */
         }
 
@@ -108,60 +108,66 @@
             padding: 0;
         }
         
-        .post-item {
+        .post-card {
             background-color: var(--post-bg-color);
             border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
             transition: all 0.3s ease;
-            box-shadow: 0 0 10px rgba(0, 229, 255, 0.1);
-            backdrop-filter: blur(10px);
-            clip-path: polygon(0% 15px, 15px 0%, 100% 0%, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0% 100%);
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.1);
             cursor: pointer;
-        }
-        .post-item:hover {
-            border-color: var(--accent-color);
-            box-shadow: 0 0 20px rgba(255, 0, 193, 0.3);
-        }
-
-        /* Glitch Effect */
-        .glitch-hover h2 {
             position: relative;
         }
-        .glitch-hover:hover h2::before,
-        .glitch-hover:hover h2::after {
-            content: attr(data-text);
+        .post-card:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 25px rgba(255, 0, 193, 0.4);
+            transform: translateY(-5px);
+        }
+        .post-card .image-container {
+            position: relative;
+        }
+        .post-card .image-container::after {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--post-bg-color);
-            overflow: hidden;
+            background: linear-gradient(to top, rgba(13, 12, 29, 0.9) 20%, rgba(13, 12, 29, 0) 100%);
+            pointer-events: none;
         }
-        .glitch-hover:hover h2::before {
-            left: 2px;
-            text-shadow: -2px 0 var(--accent-color);
-            animation: glitch-anim-1 2s infinite linear alternate-reverse;
+        .post-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
         }
-        .glitch-hover:hover h2::after {
-            left: -2px;
-            text-shadow: -2px 0 var(--text-color), 2px 2px var(--accent-color);
-            animation: glitch-anim-2 2s infinite linear alternate-reverse;
+        .fragment-overlay {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            pointer-events: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            z-index: 10;
         }
-        @keyframes glitch-anim-1 {
-            0% { clip-path: inset(45% 0 56% 0); }
-            20% { clip-path: inset(5% 0 9% 0); }
-            40% { clip-path: inset(49% 0 23% 0); }
-            60% { clip-path: inset(71% 0 11% 0); }
-            80% { clip-path: inset(33% 0 54% 0); }
-            100% { clip-path: inset(5% 0 85% 0); }
+        .post-card:hover .fragment-overlay {
+            opacity: 1;
         }
-        @keyframes glitch-anim-2 {
-            0% { clip-path: inset(78% 0 10% 0); }
-            20% { clip-path: inset(90% 0 5% 0); }
-            40% { clip-path: inset(33% 0 50% 0); }
-            60% { clip-path: inset(5% 0 78% 0); }
-            80% { clip-path: inset(82% 0 5% 0); }
-            100% { clip-path: inset(42% 0 40% 0); }
+        .fragment-overlay .fragment-title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            text-shadow: 0 0 6px var(--accent-color), 0 0 10px var(--accent-color);
+        }
+        .fragment-overlay .fragment-details {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-top: 2px;
+            text-shadow: none;
         }
 
     </style>
@@ -176,7 +182,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8 w-full">
+    <main class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 w-full">
         <div id="content-container">
             <!-- Content (post list or single post) will be loaded here -->
             <div id="loader" class="text-center py-10">
@@ -209,19 +215,48 @@
             document.getElementById('year').textContent = new Date().getFullYear();
             
             // Initial load
-            displayPostList();
+            displayPostList(true);
 
-            // Make header link go to post list
+            // Make header link go to real post list
             document.getElementById('home-link').addEventListener('click', (e) => {
                 e.preventDefault();
-                displayPostList();
+                displayPostList(false);
             });
         });
 
-        async function displayPostList() {
+        async function displayPostList(useMockData = false) {
             const contentContainer = document.getElementById('content-container');
             contentContainer.innerHTML = `<p class="text-2xl text-center py-10">ACCESSING DATASTREAM...</p>`;
             document.title = 'SECFO.ORG';
+
+            if (useMockData) {
+                let postsHtml = '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">';
+                for (let i = 1; i <= 9; i++) {
+                    const titleText = `Placeholder Post ${i}`;
+                    const date = `2025-07-${String(10 - i).padStart(2, '0')}`;
+                    const timestamp = new Date(date).getTime();
+                    const imageUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPONAME}/main/image/post.png`;
+                    const fragmentNumber = String(i).padStart(2, '0');
+                    const fileName = `placeholder.md`;
+
+                    postsHtml += `
+                        <a class="post-card" data-post-file="${fileName}">
+                            <div class="image-container">
+                                <img src="${imageUrl}" alt="${titleText}" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0d0c1d/ff00c1?text=IMAGE+NOT+FOUND';">
+                                <div class="fragment-overlay">
+                                    <span class="fragment-title">FRAGMENT ${fragmentNumber}: ${titleText}</span>
+                                    <span class="fragment-details">timestamp: ${timestamp}</span>
+                                    <span class="fragment-details">file: ${fileName}</span>
+                                </div>
+                            </div>
+                        </a>
+                    `;
+                }
+                postsHtml += '</div>';
+                contentContainer.innerHTML = postsHtml;
+                addPostLinkListeners();
+                return;
+            }
 
             const apiUrl = `https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPONAME}/contents/${POSTS_DIRECTORY}`;
 
@@ -235,35 +270,51 @@
                     .sort((a, b) => b.name.localeCompare(a.name));
 
                 if (markdownFiles.length === 0) {
-                    contentContainer.innerHTML = `<p class="text-2xl text-center text-red-500">NO LOGS FOUND.</p>`;
+                    contentContainer.innerHTML = `
+                        <div class="p-6 text-center" style="background-color: var(--post-bg-color); border: 1px solid var(--accent-color); border-radius: 8px;">
+                            <h2 class="text-3xl">SYSTEM ONLINE</h2>
+                            <p class="mt-4 text-base opacity-80">Your blog is ready. Add your first .md file to the 'post' folder on GitHub to get started.</p>
+                        </div>
+                    `;
                     return;
                 }
                 
-                let postsHtml = '<div class="space-y-6">';
+                let postsHtml = '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">';
+                let postCounter = 1;
 
                 for (const file of markdownFiles) {
                     const postResponse = await fetch(file.download_url);
                     const markdownContent = await postResponse.text();
                     
-                    const metadata = converter.getMetadata(true);
+                    const metadata = converter.getMetadata();
                     
                     const title = metadata.title || file.name.replace(/\.md$|\.markdown$/, '').replace(/-/g, ' ');
                     const titleText = title.charAt(0).toUpperCase() + title.slice(1);
                     
                     const dateMatch = file.name.match(/^(\d{4}-\d{2}-\d{2})/);
                     const date = metadata.date || (dateMatch ? dateMatch[0] : '');
-
-                    const contentWithoutFrontmatter = markdownContent.replace(/---[\s\S]*?---/, '').trim();
-                    const firstParagraph = contentWithoutFrontmatter.split('\n\n')[0];
-                    const excerpt = (firstParagraph.length > 150 ? firstParagraph.substring(0, 150) + '...' : firstParagraph) + ' [...]';
+                    const timestamp = date ? new Date(date).getTime() : 'N/A';
                     
+                    const imageName = metadata.image;
+                    const imageUrl = imageName 
+                        ? `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPONAME}/main/image/${imageName}`
+                        : `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPONAME}/main/image/post.png`;
+                    
+                    const fragmentNumber = String(postCounter).padStart(2, '0');
+
                     postsHtml += `
-                        <a class="post-item block p-4 glitch-hover" data-post-file="${file.name}">
-                            <h2 class="text-2xl" data-text="${titleText}">${titleText}</h2>
-                            <p class="mt-3 text-sm opacity-80">${excerpt}</p>
-                            <p class="text-right text-xs mt-3 opacity-60">${date}</p>
+                        <a class="post-card" data-post-file="${file.name}">
+                            <div class="image-container">
+                                <img src="${imageUrl}" alt="${titleText}" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0d0c1d/ff00c1?text=IMAGE+NOT+FOUND';">
+                                <div class="fragment-overlay">
+                                    <span class="fragment-title">FRAGMENT ${fragmentNumber}: ${titleText}</span>
+                                    <span class="fragment-details">timestamp: ${timestamp}</span>
+                                    <span class="fragment-details">file: ${file.name}</span>
+                                </div>
+                            </div>
                         </a>
                     `;
+                    postCounter++;
                 }
                 
                 postsHtml += '</div>';
@@ -277,7 +328,7 @@
         }
         
         function addPostLinkListeners() {
-            document.querySelectorAll('.post-item').forEach(link => {
+            document.querySelectorAll('.post-card').forEach(link => {
                 link.addEventListener('click', (event) => {
                     event.preventDefault();
                     const postFileName = link.dataset.postFile;
@@ -292,7 +343,39 @@
             const contentContainer = document.getElementById('content-container');
             contentContainer.innerHTML = `<p class="text-2xl text-center py-10">DECRYPTING FILE: ${fileName}...</p>`;
 
-            const postUrl = `https://raw.githubusercontent.com/secfo/html/main/${POSTS_DIRECTORY}/${fileName}`;
+            if (fileName === 'placeholder.md') {
+                 const mockMarkdown = `---
+title: Example Placeholder Post
+---
+## This is a sample post
+
+This is the content of the placeholder post. All the links on the homepage point here for this demonstration.
+
+\`\`\`javascript
+// Your actual code will be syntax highlighted.
+function test() {
+    console.log("This is a test.");
+}
+\`\`\``;
+                const htmlContent = converter.makeHtml(mockMarkdown);
+                document.title = "Placeholder Post";
+                contentContainer.innerHTML = `
+                    <div class="mb-8">
+                        <a href="#" class="text-lg back-to-index">&lt;&lt; RETURN TO INDEX</a>
+                    </div>
+                    <article class="prose max-w-none">${htmlContent}</article>
+                `;
+                contentContainer.querySelectorAll('pre code').forEach((block) => {
+                    hljs.highlightElement(block);
+                });
+                contentContainer.querySelector('.back-to-index').addEventListener('click', (event) => {
+                    event.preventDefault();
+                    displayPostList(true); // Go back to the mock list
+                });
+                return;
+            }
+
+            const postUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPONAME}/main/${POSTS_DIRECTORY}/${fileName}`;
 
             try {
                 const response = await fetch(postUrl);
