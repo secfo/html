@@ -62,14 +62,16 @@
         }
 
         .main-nav {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: rgba(13, 12, 29, 0.7);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(10px);
+            background-color: rgba(13, 12, 29, 0.8);
+            border-bottom: 2px solid var(--border-color);
         }
         .main-nav a, .footer-nav a {
             transition: color 0.2s ease-in-out;
+            padding-bottom: 4px;
         }
         .main-nav a:hover, .footer-nav a:hover {
             color: var(--accent-color);
@@ -189,34 +191,18 @@
 <body>
 
     <!-- Header -->
-    <header class="header">
-        <div class="relative">
-            <a href="#" id="home-link" class="block group">
+    <header class="header border-b-2" style="border-color: var(--border-color);">
+        <div class="max-w-7xl mx-auto">
+            <a href="#" id="home-link" class="block">
                 <img src="https://raw.githubusercontent.com/secfo/html/main/image/banner.png" alt="SECFO.ORG Banner" class="w-full h-auto block">
-                <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300">
-                    <div class="bg-black bg-opacity-70 p-2 md:p-4 rounded-md">
-                        <h1 class="text-xl md:text-3xl lg:text-4xl" style="font-family: 'VT323', monospace; color: #FFFFFF; text-shadow: 0 0 10px var(--accent-color);">ALL YOUR BASE ARE BELONG TO US</h1>
-                    </div>
-                </div>
             </a>
-            <!-- Navigation Menu -->
-            <nav class="main-nav py-2">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex items-center justify-center space-x-6 md:space-x-10">
-                        <a href="#" id="nav-blog" class="text-base font-medium">Blog</a>
-                        <a href="#" class="text-base font-medium">About</a>
-                        <a href="#" class="text-base font-medium">Links</a>
-                        <a href="#" class="text-base font-medium">Map</a>
-                    </div>
-                </div>
-            </nav>
         </div>
     </header>
 
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 w-full">
-        <div id="intro-text-container">
-            <!-- Intro text will be shown here on the main page -->
+        <div id="intro-text-container" class="mb-12 text-center">
+             <!-- Intro text will be shown here on the main page -->
         </div>
         <div id="content-container">
             <!-- Content (post list or single post) will be loaded here -->
@@ -232,7 +218,7 @@
                 <a href="#" class="text-base font-medium">Links</a>
                 <a href="#" class="text-base font-medium">Map</a>
             </div>
-            <p>&copy; <span id="year"></span> <span style="color: var(--accent-color);">secfo.org</span> // Coded with <span style="color: var(--accent-color);">&lt;3</span></p>
+            <p>&copy; <span id="year"></span> <span style="color: var(--accent-color);">secfo.org</span> // Created with <span style="color: var(--accent-color);">Gemini</span></p>
         </div>
     </footer>
 
@@ -260,10 +246,6 @@
                 e.preventDefault();
                 displayPostList();
             });
-            document.getElementById('nav-blog').addEventListener('click', (e) => {
-                e.preventDefault();
-                displayPostList();
-            });
             document.getElementById('footer-nav-blog').addEventListener('click', (e) => {
                 e.preventDefault();
                 displayPostList();
@@ -275,12 +257,10 @@
             const introContainer = document.getElementById('intro-text-container');
             
             introContainer.innerHTML = `
-                <div class="mb-12 p-6 rounded-lg" style="background-color: var(--post-bg-color); border: 1px solid var(--border-color);">
-                    <h2 class="text-3xl">Welcome to the Grid</h2>
-                    <p class="mt-4 opacity-80">This is my personal blog and digital playground. Here, I'll be sharing notes, thoughts, and code snippets related to cybersecurity, programming, and everything in between. My goal is to create a space for learning and exploration. All content is synced directly from my Obsidian vault.</p>
-                </div>
+                <h2 class="text-3xl">Welcome to the Grid</h2>
+                <p class="mt-4 max-w-3xl mx-auto opacity-80">This is my personal blog and digital playground. Here, I'll be sharing notes, thoughts, and code snippets related to cybersecurity, programming, and everything in between. My goal is to create a space for learning and exploration. All content is synced directly from my Obsidian vault.</p>
             `;
-
+            
             contentContainer.innerHTML = `<p class="text-2xl text-center py-10">ACCESSING DATASTREAM...</p>`;
             document.title = 'SECFO.ORG';
 
