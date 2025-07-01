@@ -38,18 +38,19 @@
             font-family: 'Roboto Mono', monospace;
             background-color: var(--bg-color);
             color: var(--text-color);
-            text-shadow: 0 0 5px rgba(0, 229, 255, 0.3);
-            background-image: 
-                linear-gradient(rgba(0, 229, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 229, 255, 0.05) 1px, transparent 1px);
-            background-size: 3em 3em;
-            animation: background-pan 30s linear infinite;
+        }
+        .site-wrapper {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
         main {
             flex-grow: 1;
+            background-image: 
+                linear-gradient(rgba(0, 229, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 229, 255, 0.05) 1px, transparent 1px);
+            background-size: 3em 3em;
+            animation: background-pan 30s linear infinite;
         }
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Inter', sans-serif;
@@ -61,18 +62,10 @@
             background-color: var(--header-bg-color);
         }
 
-        .main-nav {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            backdrop-filter: blur(10px);
-            background-color: rgba(13, 12, 29, 0.8);
-        }
-        .main-nav a, .footer-nav a {
+        .footer-nav a {
             transition: color 0.2s ease-in-out;
-            padding-bottom: 4px;
         }
-        .main-nav a:hover, .footer-nav a:hover {
+        .footer-nav a:hover {
             color: var(--accent-color);
         }
 
@@ -189,37 +182,39 @@
 </head>
 <body>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="max-w-7xl mx-auto">
-            <a href="#" id="home-link" class="block">
-                <img src="https://raw.githubusercontent.com/secfo/html/main/image/banner.png" alt="SECFO.ORG Banner" class="w-full h-auto block">
-            </a>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 w-full">
-        <div id="intro-text-container" class="mb-12 text-center">
-             <!-- Intro text will be shown here on the main page -->
-        </div>
-        <div id="content-container">
-            <!-- Content (post list or single post) will be loaded here -->
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer mt-12 py-8">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm opacity-70">
-            <div class="footer-nav flex items-center justify-center space-x-6 md:space-x-8 mb-6">
-                <a href="#" id="footer-nav-blog" class="text-base font-medium">Blog</a>
-                <a href="#" class="text-base font-medium">About</a>
-                <a href="#" class="text-base font-medium">Links</a>
-                <a href="#" class="text-base font-medium">Map</a>
+    <div class="site-wrapper max-w-7xl mx-auto w-full">
+        <!-- Header -->
+        <header class="header">
+            <div>
+                <a href="#" id="home-link" class="block">
+                    <img src="https://raw.githubusercontent.com/secfo/html/main/image/banner.png" alt="SECFO.ORG Banner" class="w-full h-auto block">
+                </a>
             </div>
-            <p>&copy; <span id="year"></span> <span style="color: var(--accent-color);">secfo.org</span> // Created with <span style="color: var(--accent-color);">Gemini</span></p>
-        </div>
-    </footer>
+        </header>
+
+        <!-- Main Content -->
+        <main class="py-12 px-4 sm:px-6 lg:px-8 w-full">
+            <div id="intro-text-container" class="mb-12 text-center">
+                 <!-- Intro text will be shown here on the main page -->
+            </div>
+            <div id="content-container">
+                <!-- Content (post list or single post) will be loaded here -->
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer mt-12 py-8">
+            <div class="text-center text-sm opacity-70">
+                <div class="footer-nav flex items-center justify-center space-x-6 md:space-x-8 mb-6">
+                    <a href="#" id="footer-nav-blog" class="text-base font-medium">Blog</a>
+                    <a href="#" class="text-base font-medium">About</a>
+                    <a href="#" class="text-base font-medium">Links</a>
+                    <a href="#" class="text-base font-medium">Map</a>
+                </div>
+                <p>&copy; <span id="year"></span> <span style="color: var(--accent-color);">secfo.org</span> // Created with <span style="color: var(--accent-color);">Gemini</span></p>
+            </div>
+        </footer>
+    </div>
 
     <script>
         // --- Configuration ---
